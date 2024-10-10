@@ -25,7 +25,7 @@ const Avatar: FC = () => {
             }
             reader.readAsDataURL(file); 
         }
-    })}/>
+    })}/><br/>
         </div>
     )
 }
