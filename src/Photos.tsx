@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react"; 
+import Favorites from "./Favorites";
 interface Props {
     favorites: string[]
     setFavorites: Function
@@ -16,7 +17,16 @@ const Photos: FC <Props> = (props) => {
     const [comments, setComments] = useState <string[]> ([])
     const [input, setInput] = useState <string> ('')
     const [saveComments, setSaveComments] = useState <Comment[]> ([])
+    const [quotaPhotos, setQuotaPhotos] = useState <boolean> (false)
     let likee;
+    let nomore;
+    if (quotaPhotos === true) {
+        nomore = <div>
+            <h1>Вы не можете добавить больше 9 фото</h1><span onClick={() => {
+                setQuotaPhotos(false)
+            }}>Понятно</span>
+        </div>
+    }
     useEffect(() => {
     if (image){
         const newComments: Comment = {
@@ -94,13 +104,17 @@ const Photos: FC <Props> = (props) => {
             reader.onload = function () { 
                 if (typeof reader.result === 'string'){ 
                 const resultGalary = localStorage.getItem('galary')
-                if (resultGalary) {
+                if (resultGalary !== null && photos.length < 9) {
                     const result = JSON.parse(resultGalary)
                     localStorage.setItem('galary', JSON.stringify([...result, reader.result]))
                 } else if (resultGalary == null) {
                     localStorage.setItem('galary', JSON.stringify([reader.result]))
                 }
-                setPhotos([...photos, reader.result]) 
+                if (photos.length < 9){
+                    setPhotos([...photos, reader.result]) 
+                } else {
+                    setQuotaPhotos(true)
+                }
             }} 
         }  
     })}/> 
@@ -151,25 +165,27 @@ const Photos: FC <Props> = (props) => {
                 localStorage.setItem('likes', JSON.stringify([...filterLikes]))
             }
             }
+            const newFavorites = props.favorites.filter((item) => item !== image)
+            localStorage.setItem('favorites', JSON.stringify(newFavorites))
+            props.setFavorites(newFavorites)
         }}>Удалить фото</p>
         {likee}
-        <h3 className="likes">Likes: {like ? '1' : '0'}</h3>
         <div className="comment">
         <input onChange={((event: ChangeEvent <HTMLInputElement>) => {
             setComment(event.target.value)
             setInput(event.target.value)
         })} value={input}/>
         <button onClick={() => {
-            if (comment) {
+            if (comment !== null) {
                 setComments([...comments, comment])
             }
             setComment(null)
             setInput('')
         }}>Сохранить</button>
         <div className="comments">
-        <ul>
+        <ul className="comments-style">
         {comments.map((item, index) => {
-            return <li key={index}><div><p>{item}</p><p onClick={() => {
+            return <li key={index} className="comment-style"><div><p>{item}</p><p onClick={() => {
                 const deleteComment = comments.filter(el => el !== item)
                 setComments(deleteComment)
             }} className="delete-comment">Удалить</p></div></li>
@@ -180,6 +196,7 @@ const Photos: FC <Props> = (props) => {
             const sameFavorites = props.favorites.find(item => item == image)
             if (sameFavorites == undefined) {
                 props.setFavorites([...props.favorites, image])
+                localStorage.setItem('favorites', JSON.stringify([...props.favorites, image]))
             }
         }}>Добавить в избранное</button>
         </div>
@@ -188,6 +205,7 @@ const Photos: FC <Props> = (props) => {
     return( 
         <div>
             {content}
+            {nomore}
         </div>
     ) 
 } 
