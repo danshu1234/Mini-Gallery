@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react"; 
-import Favorites from "./Favorites";
 interface Props {
     favorites: string[]
     setFavorites: Function
@@ -145,7 +144,7 @@ const Photos: FC <Props> = (props) => {
         <p onClick={() => {
             setImage(null)
             setComments([])
-        }} className="back-to-photos">Назад</p>
+        }} className="back-to-photos">✕</p>
         <p className="delete" onClick={() => {
             const getStorage = localStorage.getItem('galary')
             if (getStorage) {

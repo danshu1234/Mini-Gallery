@@ -1,6 +1,10 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import './App.css'
-const Avatar: FC = () => {
+interface PropsAvatar {
+    authorization: string,
+    setAuthorization: Function,
+}
+const Avatar: FC <PropsAvatar> = (props) => {
     const [ava, setAva] = useState <string | null> (null)
     let avatar;
     if (ava == null) {
@@ -13,6 +17,10 @@ const Avatar: FC = () => {
     }, [])
     return (
         <div>
+        <button className="exitBtn" onClick={() => {
+            props.setAuthorization('enter')
+            localStorage.setItem('authorizate', 'enter')
+        }}>Выйти из аккаунта</button>
         {avatar}
         <input type="file" accept=".jpg,.jpeg,.png" onChange={((event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files
