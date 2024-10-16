@@ -9,15 +9,16 @@ const Enter: FC <PropsEnter> = (props) => {
     const [pass, setPass] = useState <string> ('')
     const [isEnter, setIsEnter] = useState <string> ('')
     return (
-        <div>
+        <div className="reg-container">
+            <h2 className="head-reg">Photogram</h2>
             <input placeholder="login" onChange={(event: ChangeEvent <HTMLInputElement>) => {
                 setLog(event.target.value)
                 setIsEnter('')
-            }}/><br/>
+            }} className="login-reg-input"/><br/>
             <input placeholder="password" onChange={(event: ChangeEvent <HTMLInputElement>) => {
                 setPass(event.target.value)
                 setIsEnter('')
-            }}/><br/>
+            }} className="password-reg-input"/>
             <button onClick={() => {
                 if (log !== '' && pass !== '') {
                     const getStorage = localStorage.getItem('dataEnter')
@@ -34,10 +35,10 @@ const Enter: FC <PropsEnter> = (props) => {
                         }
                     }
                 } else {
-                    setIsEnter('Пожалуйста, введите данные для входа')
+                    setIsEnter('Пожалуйста, введите данные')
                 }
-            }}>Войти</button><br/>
-            {isEnter}
+            }} className="reg-btn">Войти</button>
+            <p className="data-reg">{isEnter}</p>
         </div>
     )
 }

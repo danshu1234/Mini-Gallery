@@ -12,20 +12,21 @@ const Registration: FC <PropsReg> = (props) => {
         password: string,
     }
     return (
-        <div>
+        <div className="reg-container">
+            <h2 className="head-reg">Photogram</h2>
             <input placeholder="login" onChange={(event: ChangeEvent <HTMLInputElement>) => {
                 setLog(event.target.value)
                 setIsEnter('')
-            }}/><br/>
+            }} className="login-reg-input"/><br/>
             <input placeholder="password" onChange={(event: ChangeEvent <HTMLInputElement>) => {
                 setPass(event.target.value)
                 setIsEnter('')
-            }}/><br/>
+            }} className="password-reg-input"/>
             <button onClick={() => {
                 if (log !== '' && pass !== '') {
                     const arrPass = pass.split('')
                     if (arrPass.length < 8) {
-                        setIsEnter('Парль должен состоять не менее чем из 8 символов')
+                        setIsEnter('Пароль-не менее 8 символов')
                     } else {
                         setIsEnter('Вы успешно зарегистрированы...')
                         setTimeout(() => {
@@ -39,10 +40,10 @@ const Registration: FC <PropsReg> = (props) => {
                         localStorage.setItem('authorizate', 'succes')
                     }
                 } else {
-                    setIsEnter('Пожалуйста, введите логин и пароль')
+                    setIsEnter('Пожалуйста, введите данные')
                 }
-            }}>Зарегистрироваться</button><br/>
-            {isEnter}
+            }} className="reg-btn">Зарегистрироваться</button>
+            <p className="data-reg">{isEnter}</p>
         </div>
     )
 }

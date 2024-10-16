@@ -9,7 +9,7 @@ const Favorites: FC <PropsFavorites> = (props) => {
         emptiness = <h1>Здесь пока пусто</h1>
     }
     return (
-        <div>
+        <div className="favorites-contain">
             {emptiness}
             <ul className="favorites">
             {props.favorites.map((item, index) => {

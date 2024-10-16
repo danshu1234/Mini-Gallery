@@ -1,40 +1,58 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import './App.css'
+import './App.css';
+
 interface PropsAvatar {
     authorization: string,
     setAuthorization: Function,
 }
-const Avatar: FC <PropsAvatar> = (props) => {
-    const [ava, setAva] = useState <string | null> (null)
+
+const Avatar: FC<PropsAvatar> = (props) => {
+    const [ava, setAva] = useState<string | null>(null);
+    
     let avatar;
+    let miniAvatar;
+
     if (ava == null) {
-        avatar = <div className="avatar"><p className="hereAvatar">Здесь будет ваш аватар</p></div>
+        miniAvatar = <div className="miniAva"></div>;
     } else {
-        avatar = <img src= {ava} className="ava"/>
+        miniAvatar = <img src={ava} className="miniAvatar" alt="Мини-аватар"/>;
     }
+
+    if (ava == null) {
+        avatar = <div className="avatar"><p className="hereAvatar">Здесь будет ваш аватар</p></div>;
+    } else {
+        avatar = <img src={ava} className="ava" alt="Аватар"/>;
+    }
+
     useEffect(() => {
-            setAva(localStorage.getItem('avatar'))
-    }, [])
-    return (
-        <div>
-        <button className="exitBtn" onClick={() => {
-            props.setAuthorization('enter')
-            localStorage.setItem('authorizate', 'enter')
-        }}>Выйти из аккаунта</button>
-        {avatar}
-        <input type="file" accept=".jpg,.jpeg,.png" onChange={((event: ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files
-        if (files !== null && files.length > 0){
-            const file = files[0]
-            const reader = new FileReader()
-            reader.onload = (e) => {
-                setAva(e.target?.result as string)
-                localStorage.setItem('avatar', e.target?.result as string)
-            }
-            reader.readAsDataURL(file); 
+        const storedAvatar = localStorage.getItem('avatar');
+        if (storedAvatar) {
+            setAva(storedAvatar);
         }
-    })}/><br/>
+    }, []);
+
+    return (
+        <div className="avatar-contain">
+            {avatar}
+            <label className="custom-ava-upload">
+                Выбрать аватар
+                <input type="file" accept=".jpg,.jpeg,.png" onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                        const files = event.target.files;
+                        if (files !== null && files.length > 0) {
+                            const file = files[0];
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                setAva(e.target?.result as string);
+                                localStorage.setItem('avatar', e.target?.result as string);
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    }} 
+                />
+            </label><br/>
+            {miniAvatar}
         </div>
-    )
+    );
 }
-export default Avatar
+
+export default Avatar;

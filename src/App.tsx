@@ -10,16 +10,16 @@ function App() {
   const navigate = useNavigate()
   const [favorites, setFavorites] = useState <string[]> ([])
   const [btnFavorites, setBtnFavorites] = useState <boolean> (true)
-  const [dark, setDark] = useState <boolean> (false)
   const [authorization, setAuthorization] = useState <string> ('registration')
+  const [showBtn, setShowBtn] = useState <boolean> (false)
   const location = useLocation()
   let authorizate;
-  let btnFav;
-  let theme;
+  let favAndExit;
   if (authorization == 'registration') {
     authorizate = <Registration authorization = {authorization} setAuthorization = {setAuthorization}/>
   } else if (authorization == 'succes') {
-    authorizate = <div>
+    authorizate = <div className='succes-contain'>
+      <img className="arrow" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Breezeicons-actions-22-go-down.svg/2048px-Breezeicons-actions-22-go-down.svg.png" onClick={() => setShowBtn(!showBtn)}/>
       <Avatar authorization = {authorization} setAuthorization = {setAuthorization}/>
       <Photos favorites={favorites} setFavorites={setFavorites}/>
     </div>
@@ -27,39 +27,16 @@ function App() {
     authorizate = <Enter authorization = {authorization} setAuthorization = {setAuthorization}/>
   }
   if (btnFavorites == true) {
-    btnFav = <button className='favorites-btn' onClick={() => {
+    favAndExit= <div className='favAndExit'>
+      <p onClick={() => {
       navigate('/favorites')
-    }}>Избранное</button>
-  }
-  if (dark == false) {
-    theme = <div className='light-topic'>
-    {btnFav}
-    <label className="switch">
-        <input type="checkbox" onChange={() => {
-          setDark(!dark)
-          localStorage.setItem('dark', JSON.stringify(!dark))
-        }}/>
-        <span className="slider"></span>
-    </label>
-    <Routes>
-      <Route path='favorites' element = {<Favorites  favorites={favorites} setFavorites={setFavorites}/>}/>
-      <Route path='/' element = {authorizate}/>
-    </Routes>
-    </div>
-  } else if (dark == true) {
-    theme = <div className='dark-topic'>
-    {btnFav}
-    <label className="switch">
-        <input type="checkbox" onChange={() => {
-          setDark(!dark)
-          localStorage.setItem('dark', JSON.stringify(!dark))
-        }}/>
-        <span className="slider"></span>
-    </label>
-    <Routes>
-      <Route path='favorites' element = {<Favorites  favorites={favorites} setFavorites={setFavorites}/>}/>
-      <Route path='/' element = {authorizate}/>
-    </Routes>
+      setShowBtn(false)
+    }} className='fav-btn'>Избранное</p>
+    <p onClick={() => {
+            setAuthorization('enter')
+            setShowBtn(false)
+            localStorage.setItem('authorizate', 'enter')
+        }} className='exit-btn'>Выйти</p>
     </div>
   }
   useEffect(() => {
@@ -67,25 +44,25 @@ function App() {
     if (arrFavorites){
       setFavorites(JSON.parse(arrFavorites))
     }
-    const isDark = localStorage.getItem('dark')
-    if (isDark) {
-      setDark(JSON.parse(isDark))
-    }
     const isAuthorizate = localStorage.getItem('authorizate')
     if (isAuthorizate) {
       setAuthorization(isAuthorizate)
     }
   }, [])
   useEffect(() => {
-    if (location.pathname == '/'){
+    if (location.pathname == '/' && authorization == 'succes' && showBtn === true){
       setBtnFavorites(true)
     } else {
       setBtnFavorites(false)
     }
   })
   return ( 
-    <div>
-    {theme}
+    <div className='main'>
+      {favAndExit}
+     <Routes>
+      <Route path='favorites' element = {<Favorites  favorites={favorites} setFavorites={setFavorites}/>}/>
+      <Route path='/' element = {authorizate}/>
+    </Routes>
     </div>
   );
 }

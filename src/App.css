@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Artifika&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -14,7 +17,7 @@
 }
 
 .hereAvatar{
-  padding-top: 35%;
+  padding-top: 45%;
   opacity: 0.7;
 }
 
@@ -23,7 +26,7 @@
   height: 200px;
   border-radius: 100%;
   position: relative;
-  bottom: 25px;
+  bottom: 0px;
 }
 
 .photo{
@@ -31,6 +34,7 @@
   height: 300px;
   margin-left: 40px;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .photos{
@@ -218,7 +222,7 @@
 }
 
 .light-topic{
-  background-color: white;
+  background-color: rgb(168, 223, 228);
   height: 100vh;
 }
 .dark-topic{
@@ -281,3 +285,172 @@ input:checked + .slider:before {
 }
 
 
+.reg-container{
+  width: 250px;
+  height: 400px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  border-radius: 10px;
+}
+
+.login-reg-input{
+  width: 180px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid rgb(169, 140, 140);
+}
+
+.login-reg-input:focus{
+  outline: none;
+  border: 2px solid rgb(150, 150, 210);
+}
+
+.password-reg-input{
+  width: 180px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid rgb(169, 140, 140);
+}
+
+.password-reg-input:focus{
+  outline: none;
+  border: 2px solid rgb(150, 150, 210);
+}
+
+.reg-btn{
+  margin-top: 40px;
+  background: linear-gradient(to right, rgb(70, 185, 234) 2%, rgb(66, 66, 195) 98%);
+  height: 40px;
+  width: 150px;
+  border-radius: 20px;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.head-reg{
+  margin-bottom: 40px;
+  font-family: "Artifika", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.data-reg{
+scale: 0.8;
+margin-top: 20px;
+}
+
+.main{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #cfdff0;
+}
+
+.avatar-contain{
+  margin-top: 60px;
+}
+
+.miniAva{
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background-color: #ccc;
+  position: absolute;
+  left: 1000px;
+  top: 0px;
+}
+
+.miniAvatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  position: absolute;
+  left: 1430px;
+  top: 0px;
+}
+
+.arrow{
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 1470px;
+  top: 6px;
+  cursor: pointer;
+}
+
+.favAndExit{
+  width: 100px;
+  position: absolute;
+  left: 1420px;
+  top: 50px;
+}
+
+.exit-btn{
+  opacity: 0.9;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.fav-btn{
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.succes-contain{
+  margin-top: -60px;
+  height: 100vh;
+  background-size: cover;
+  background-image: url('https://wallpapers.com/images/hd/1920x1080-social-background-sgobh5i793hxw1co.jpg');
+}
+
+.favorites-contain{
+  height: 100vh;
+  background-size: cover;
+  background-image: url('https://wallpapers.com/images/hd/1920x1080-social-background-sgobh5i793hxw1co.jpg');
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #496acb; 
+  color: white;
+  border-radius: 5px;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.custom-file-upload input {
+  display: none; 
+}
+
+.contain-photos{
+  margin-top: 50px;
+}
+
+.custom-ava-upload{
+  position: relative;
+  display: inline-block;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+  border-radius: 5px;
+  margin-left: -45px;
+  margin-bottom: 20px;
+  opacity: 0.7;
+  top: -10px;
+  font-size: 80%;
+}
+
+.custom-ava-upload input {
+  display: none; 
+}
