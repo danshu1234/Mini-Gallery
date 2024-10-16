@@ -221,15 +221,6 @@
   cursor: pointer;
 }
 
-.light-topic{
-  background-color: rgb(168, 223, 228);
-  height: 100vh;
-}
-.dark-topic{
-  background-color: rgb(46, 39, 39);
-  height: 100vh;
-}
-
 .switch {
   position: relative;
   display: inline-block;
@@ -346,17 +337,13 @@ margin-top: 20px;
 }
 
 .main{
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100vh;
-  background-color: #cfdff0;
+  min-height: 100vh; 
+  background: linear-gradient(to left, #cfdff0, #99b0c9);
+  display: flex; 
+  flex-direction: column; 
 }
 
-.avatar-contain{
-  margin-top: 60px;
-}
 
 .miniAva{
   width: 50px;
@@ -404,19 +391,6 @@ margin-top: 20px;
   cursor: pointer;
 }
 
-.succes-contain{
-  margin-top: -60px;
-  height: 100vh;
-  background-size: cover;
-  background-image: url('https://wallpapers.com/images/hd/1920x1080-social-background-sgobh5i793hxw1co.jpg');
-}
-
-.favorites-contain{
-  height: 100vh;
-  background-size: cover;
-  background-image: url('https://wallpapers.com/images/hd/1920x1080-social-background-sgobh5i793hxw1co.jpg');
-}
-
 .custom-file-upload {
   display: inline-block;
   padding: 10px 20px;
@@ -442,11 +416,11 @@ margin-top: 20px;
   display: inline-block;
   padding: 10px 20px;
   cursor: pointer;
-  color: white;
+  color: black;
   border-radius: 5px;
   margin-left: -45px;
   margin-bottom: 20px;
-  opacity: 0.7;
+  opacity: 0.9;
   top: -10px;
   font-size: 80%;
 }
@@ -454,3 +428,9 @@ margin-top: 20px;
 .custom-ava-upload input {
   display: none; 
 }
+
+.quota{
+  width: 200px;
+  height: 100px;
+}
+

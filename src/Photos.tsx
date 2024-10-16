@@ -25,7 +25,7 @@ const Photos: FC<Props> = (props) => {
 
     if (quotaPhotos === true) {
         nomore = (
-            <div>
+            <div className="quota">
                 <h1>Вы не можете добавить больше 9 фото</h1>
                 <span onClick={() => {
                     setQuotaPhotos(false);
@@ -100,7 +100,9 @@ const Photos: FC<Props> = (props) => {
             setSaveComments(JSON.parse(localComments));
         }
     }, []);
-
+useEffect(() => {
+console.log(photos)
+}, [photos])
     if (image == null) {
         content = (
             <div className="contain-photos">
@@ -109,14 +111,15 @@ const Photos: FC<Props> = (props) => {
                         Добавить фото <input type="file" onChange={(event: ChangeEvent<HTMLInputElement>) => { if (event.target.files !== null) { 
                                     const file = event.target.files[0]; const reader = new FileReader(); 
                                     reader.readAsDataURL(file); reader.onload = function () { if (typeof reader.result === 'string') { const resultGalary = localStorage.getItem('galary');
-                                            if (resultGalary !== null && photos.length < 9) {
+                                            if (resultGalary !== null && photos.length < 8) {
                                                 const result = JSON.parse(resultGalary);
                                                 localStorage.setItem('galary', JSON.stringify([...result, reader.result]));
                                             } else if (resultGalary == null) {
                                                 localStorage.setItem('galary', JSON.stringify([reader.result]));
                                             }
-                                            if (photos.length < 9) {
-                                                setPhotos([...photos, reader.result]); } else {
+                                            if (photos.length < 8) {
+                                                setPhotos([...photos, reader.result]); } 
+                                            else {
                                                 setQuotaPhotos(true);
                                             }
                                         }
@@ -154,7 +157,11 @@ const Photos: FC<Props> = (props) => {
                     if (getStorage) {
                         const parseStorage = JSON.parse(getStorage); localStorage.setItem('galary', JSON.stringify(parseStorage.filter((item: string) => item !== image)));
                     }
-                    setPhotos(photos.filter((item) => item !== image));
+                    const notDeletePhotos = photos.filter(item => item !== image)
+                    const deletePhotos = photos.filter(item => item == image)
+                    deletePhotos.splice(-1, 1)   
+                    const newPhotos = [...notDeletePhotos, ...deletePhotos] 
+                    setPhotos(newPhotos)                 
                     setImage(null);
                     if (image) {
                         const filterLikes = likes.filter(item => item !== image);
