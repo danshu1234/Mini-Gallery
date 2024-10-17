@@ -75,11 +75,12 @@
   cursor: pointer;
 }
 
-.delete{
+.delete-photo{
   position: absolute;
   left: 940px;
   bottom: 20px;
   cursor: pointer;
+  opacity: 0.8;
 }
 
 .custom-file-upload{
@@ -177,6 +178,11 @@
   margin-top: 10px;
 }
 
+.main-comments{
+  display: flex;
+  flex-direction: row;
+}
+
 .comments-style{
   padding-left: 20px;
   padding-top: 15px;
@@ -191,6 +197,8 @@
 .delete-comment{
   cursor: pointer;
   position: relative;
+  opacity: 0.6;
+  margin-left: 15px;
 }
 
 .favorites-btn{
@@ -201,6 +209,11 @@
 
 .add-favorites{
   position: relative;
+  background-color: #c1c4dd;
+  border: none;
+  cursor: pointer;
+  font-size: 85%;
+  opacity: 0.8;
 }
 
 .favorite{
@@ -430,7 +443,49 @@ margin-top: 20px;
 }
 
 .quota{
-  width: 200px;
-  height: 100px;
+  position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 130px;
+    background-color: #2196F3;
+    bottom: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius: 20px;
+    opacity: 0.95;
+    padding: 5px;
+    color: aqua;
+    text-align: center; 
+}
+
+.ok{
+  position: relative;
+  top: 23px;
+  cursor: pointer;
+}
+
+.comment-input{
+  background-color: #c1c4dd;
+  outline: none;
+  border-radius: 7px;
+  border: 0;
+  height: 20px;
+}
+
+.comment-input:focus{
+  background-color: #c1c4dd;
+  outline: none;
+  border: 1px solid rgb(122, 97, 97);
+}
+
+.save-comment{
+  background-color: #c1c4dd;
+  border: none;
+  cursor: pointer;
+  font-size: 90%;
+  opacity: 0.8;
 }
 

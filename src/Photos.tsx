@@ -19,17 +19,25 @@ const Photos: FC<Props> = (props) => {
     const [comments, setComments] = useState<string[]>([]);
     const [input, setInput] = useState<string>('');
     const [saveComments, setSaveComments] = useState<Comment[]>([]);
-    const [quotaPhotos, setQuotaPhotos] = useState<boolean>(false);
+    const [quotaPhotos, setQuotaPhotos] = useState<string>('none');
  let likee;
     let nomore;
-
-    if (quotaPhotos === true) {
+    if (quotaPhotos === 'same') {
         nomore = (
             <div className="quota">
-                <h1>Вы не можете добавить больше 9 фото</h1>
+                <p>У вас в галлерее уже есть это фото</p>
                 <span onClick={() => {
-                    setQuotaPhotos(false);
-                }}>Понятно</span>
+                    setQuotaPhotos('none');
+                }} className="ok">Понятно</span>
+            </div>
+        );
+    } else if (quotaPhotos === 'full') {
+        nomore = (
+            <div className="quota">
+                <p>Ой, похоже хранилище переполнено, попоробуйте добавить другой файл, или освободите место</p>
+                <span onClick={() => {
+                    setQuotaPhotos('none');
+                }} className="ok">Понятно</span>
             </div>
         );
     }
@@ -43,7 +51,6 @@ const Photos: FC<Props> = (props) => {
             const sameComments = saveComments.filter(item => item.url !== image);
             setSaveComments([newComments, ...sameComments]); }
     }, [comments]);
-
     useEffect(() => {
         if (saveComments.length !== 0) {
             localStorage.setItem('comments', JSON.stringify(saveComments));
@@ -100,9 +107,6 @@ const Photos: FC<Props> = (props) => {
             setSaveComments(JSON.parse(localComments));
         }
     }, []);
-useEffect(() => {
-console.log(photos)
-}, [photos])
     if (image == null) {
         content = (
             <div className="contain-photos">
@@ -110,19 +114,26 @@ console.log(photos)
                     <label className="custom-file-upload">
                         Добавить фото <input type="file" onChange={(event: ChangeEvent<HTMLInputElement>) => { if (event.target.files !== null) { 
                                     const file = event.target.files[0]; const reader = new FileReader(); 
-                                    reader.readAsDataURL(file); reader.onload = function () { if (typeof reader.result === 'string') { const resultGalary = localStorage.getItem('galary');
-                                            if (resultGalary !== null && photos.length < 8) {
+                                    reader.readAsDataURL(file); reader.onload = function () { 
+                                        if (typeof reader.result === 'string') { 
+                                            const findPhoto = photos.find(el => el == reader.result)
+                                            const resultGalary = localStorage.getItem('galary');
+                                            if (findPhoto == undefined) {
+                                            if (resultGalary !== null) {        
+                                                try {
                                                 const result = JSON.parse(resultGalary);
                                                 localStorage.setItem('galary', JSON.stringify([...result, reader.result]));
+                                                setPhotos([...photos, reader.result])
+                                                }  catch (e) {
+                                                    setQuotaPhotos('full')
+                                                }                                                                                
                                             } else if (resultGalary == null) {
                                                 localStorage.setItem('galary', JSON.stringify([reader.result]));
-                                            }
-                                            if (photos.length < 8) {
-                                                setPhotos([...photos, reader.result]); } 
-                                            else {
-                                                setQuotaPhotos(true);
-                                            }
+                                            }                                                                                                                       
+                                        } else {
+                                            setQuotaPhotos('same')
                                         }
+                                    } 
                                     }; 
                                 } }} 
                         /> </label>
@@ -152,16 +163,13 @@ console.log(photos)
                     setImage(null);
                     setComments([]);
                 }} className="back-to-photos">✕</p>
-                <p className="delete" onClick={() => {
+                <p className="delete-photo" onClick={() => {
                     const getStorage = localStorage.getItem('galary');
                     if (getStorage) {
                         const parseStorage = JSON.parse(getStorage); localStorage.setItem('galary', JSON.stringify(parseStorage.filter((item: string) => item !== image)));
                     }
-                    const notDeletePhotos = photos.filter(item => item !== image)
-                    const deletePhotos = photos.filter(item => item == image)
-                    deletePhotos.splice(-1, 1)   
-                    const newPhotos = [...notDeletePhotos, ...deletePhotos] 
-                    setPhotos(newPhotos)                 
+                    const notDeletePhotos = photos.filter(item => item !== image)   
+                    setPhotos(notDeletePhotos)                 
                     setImage(null);
                     if (image) {
                         const filterLikes = likes.filter(item => item !== image);
@@ -177,24 +185,27 @@ console.log(photos)
                     <input onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setComment(event.target.value);
                         setInput(event.target.value);
-                    }} value={input}/>
+                    }} value={input} placeholder="Комментарий" className="comment-input"/>
                     <button onClick={() => {
                         if (comment !== null) {
                             setComments([...comments, comment]);
                         }
                         setComment(null);
                         setInput('');
-                    }}>Сохранить</button>
+                    }} className="save-comment">Сохранить</button>
                     <div className="comments">
                         <ul className="comments-style">
                             {comments.map((item, index) => {
                                 return (
                                     <li key={index} className="comment-style">
-                                        <div>
-                                            <p>{item}</p>
+                                        <div className="main-comments">
+                                            <span>{item}</span>
                                             <p onClick={() => {
-                                                const deleteComment = comments.filter(el => el !== item);
-                                                setComments(deleteComment);
+                                                const notDeleteComments = comments.filter(el => el !== item);
+                                                const deleteComments = comments.filter(el => el == item)
+                                                deleteComments.splice(-1, 1)
+                                                const withoutDelete = [...notDeleteComments, ...deleteComments]
+                                                setComments(withoutDelete)
                                             }} className="delete-comment">Удалить</p>
                                         </div>
                                     </li>
