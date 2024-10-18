@@ -1,0 +1,60 @@
+.reg-container {
+    width: 250px;
+    height: 400px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    border-radius: 10px;
+  }
+  
+  .head-reg {
+    margin-bottom: 40px;
+    font-family: "Artifika", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .login-reg-input {
+    width: 180px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid rgb(169, 140, 140);
+  }
+  
+  .login-reg-input:focus {
+    outline: none;
+    border: 2px solid rgb(150, 150, 210);
+  }
+  
+  .password-reg-input {
+    width: 180px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid rgb(169, 140, 140);
+  }
+  
+  .password-reg-input:focus {
+    outline: none;
+    border: 2px solid rgb(150, 150, 210);
+  }
+  
+  .reg-btn {
+    margin-top: 40px;
+    background: linear-gradient(to right, rgb(70, 185, 234) 2%, rgb(66, 66, 195) 98%);
+    height: 40px;
+    width: 150px;
+    border-radius: 20px;
+    color: whitesmoke;
+    cursor: pointer;
+  }
+  
+  .data-reg {
+    scale: 0.8;
+    margin-top: 20px;
+  }
+  

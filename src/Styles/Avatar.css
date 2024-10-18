@@ -1,0 +1,66 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+  .avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    background-color: rgb(191, 155, 155);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .hereAvatar {
+    padding-top: 45%;
+    opacity: 0.7;
+  }
+  
+  .ava {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .miniAva {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    position: absolute;
+    left: 1430px;
+    top: 0px;
+    background-color: #ccc;
+  }
+  
+  .miniAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    position: absolute;
+    left: 1430px;
+    top: 0px;
+  }
+  
+  .custom-ava-upload {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: black;
+    border-radius: 5px;
+    margin-left: 150px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+    top: -30px;
+    font-size: 80%;
+  }
+  
+  .custom-ava-upload input {
+    display: none; 
+  }
+  

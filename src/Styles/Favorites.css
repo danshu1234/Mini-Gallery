@@ -1,0 +1,27 @@
+.emptiness {
+    position: absolute; top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    text-align: center; opacity: 0.5;
+  }
+  
+  .favorites {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .favorite {
+    height: 300px;
+    width: 300px;
+    margin-left: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  
+  .delete-from-favorites {
+    position: relative;
+    left: 70px;
+    cursor: pointer;
+  }
+  

@@ -1,5 +1,6 @@
 import { ChangeEvent, FC } from "react";
 import { useState } from "react";
+import '../Styles/Enter.css'
 interface PropsEnter {
     authorization: string,
     setAuthorization: Function,
@@ -10,7 +11,7 @@ const Enter: FC <PropsEnter> = (props) => {
     const [isEnter, setIsEnter] = useState <string> ('')
     return (
         <div className="reg-container">
-            <h2 className="head-reg">Photogram</h2>
+            <h2 className="head-reg">Mini-Gallery</h2>
             <input placeholder="login" onChange={(event: ChangeEvent <HTMLInputElement>) => {
                 setLog(event.target.value)
                 setIsEnter('')

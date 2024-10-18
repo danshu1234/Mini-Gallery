@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react"; 
-
+import '../Styles/Photos.css'
 interface Props {
     favorites: string[]
     setFavorites: Function
@@ -36,12 +36,18 @@ const Photos: FC<Props> = (props) => {
             <div className="quota">
                 <p>Ой, похоже хранилище переполнено, попоробуйте добавить другой файл, или освободите место</p>
                 <span onClick={() => {
-                    setQuotaPhotos('none');
+                    setQuotaPhotos('none')
                 }} className="ok">Понятно</span>
             </div>
-        );
+        )
+    } else if (quotaPhotos == 'blob') {
+        <div className="quota">
+                <p>Похоже этот формат не поддерживается</p>
+                <span onClick={() => {
+                    setQuotaPhotos('none')
+                }} className="ok">Понятно</span>
+            </div>
     }
-
     useEffect(() => {
         if (image) {
             const newComments: Comment = {
@@ -90,7 +96,7 @@ const Photos: FC<Props> = (props) => {
     let content;
 
     useEffect(() => {
-        const allPhotos = localStorage.getItem('galary');
+        const allPhotos = localStorage.getItem('gallery');
         if (allPhotos) {
             setPhotos(JSON.parse(allPhotos));
         }
@@ -113,28 +119,33 @@ const Photos: FC<Props> = (props) => {
                 <div> 
                     <label className="custom-file-upload">
                         Добавить фото <input type="file" onChange={(event: ChangeEvent<HTMLInputElement>) => { if (event.target.files !== null) { 
-                                    const file = event.target.files[0]; const reader = new FileReader(); 
+                                    const file = event.target.files[0]; 
+                                    if (file instanceof Blob)  {
+                                        const reader = new FileReader()                             
                                     reader.readAsDataURL(file); reader.onload = function () { 
                                         if (typeof reader.result === 'string') { 
                                             const findPhoto = photos.find(el => el == reader.result)
-                                            const resultGalary = localStorage.getItem('galary');
+                                            const resultgallery = localStorage.getItem('gallery');
                                             if (findPhoto == undefined) {
-                                            if (resultGalary !== null) {        
+                                            if (resultgallery !== null) {        
                                                 try {
-                                                const result = JSON.parse(resultGalary);
-                                                localStorage.setItem('galary', JSON.stringify([...result, reader.result]));
+                                                const result = JSON.parse(resultgallery);
+                                                localStorage.setItem('gallery', JSON.stringify([...result, reader.result]));
                                                 setPhotos([...photos, reader.result])
                                                 }  catch (e) {
                                                     setQuotaPhotos('full')
                                                 }                                                                                
-                                            } else if (resultGalary == null) {
-                                                localStorage.setItem('galary', JSON.stringify([reader.result]));
+                                            } else if (resultgallery == null) {
+                                                localStorage.setItem('gallery', JSON.stringify([reader.result]));
                                             }                                                                                                                       
                                         } else {
                                             setQuotaPhotos('same')
                                         }
                                     } 
-                                    }; 
+                                    }
+                                    } else {
+                                        setQuotaPhotos('blob')
+                                    }                            
                                 } }} 
                         /> </label>
                     <ul className="photos"> 
@@ -164,13 +175,14 @@ const Photos: FC<Props> = (props) => {
                     setComments([]);
                 }} className="back-to-photos">✕</p>
                 <p className="delete-photo" onClick={() => {
-                    const getStorage = localStorage.getItem('galary');
+                    const getStorage = localStorage.getItem('gallery');
                     if (getStorage) {
-                        const parseStorage = JSON.parse(getStorage); localStorage.setItem('galary', JSON.stringify(parseStorage.filter((item: string) => item !== image)));
+                        const parseStorage = JSON.parse(getStorage); localStorage.setItem('gallery', JSON.stringify(parseStorage.filter((item: string) => item !== image)));
                     }
                     const notDeletePhotos = photos.filter(item => item !== image)   
                     setPhotos(notDeletePhotos)                 
                     setImage(null);
+                    setSaveComments(saveComments.filter(el => el.url !== image))
                     if (image) {
                         const filterLikes = likes.filter(item => item !== image);
                         setLikes(filterLikes);

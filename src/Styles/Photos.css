@@ -1,0 +1,225 @@
+.name-app {
+    position: absolute;
+    left: 700px;
+    font-family: "Artifika", serif;
+    font-weight: 400;
+    font-style: normal;
+    color: rgb(31, 52, 70);
+  }
+  
+  .photo {
+    width: 300px;
+    height: 300px;
+    margin-left: 40px;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .photos {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .photo:hover {
+    width: 300px;
+    height: 300px;
+    margin-left: 40px;
+    cursor: pointer;
+    scale: 1.01;
+  }
+  
+  .contain-image {
+    position: relative;
+    width: 80vw;
+    margin-left: 180px;
+    bottom: 30px;
+    height: 500px;
+    background-color: rgba(182, 151, 192, 0.3);
+    border-radius: 30px;
+  }
+  
+  .bigImg {
+    width: 900px;
+    height: 500px;
+    border-radius: 30px 0px 0px 0px;
+  }
+  
+  .back-to-photos {
+    top: -15px;
+    position: absolute;
+    right: -15px;
+    cursor: pointer;
+  }
+  
+  .delete-photo {
+    position: absolute;
+    left: 940px;
+    bottom: 20px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  
+  .custom-file-upload {
+    cursor: pointer;
+  }
+  
+  .heart-not-like {
+    position: relative;
+    left: 950px;
+    bottom: 480px;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(221, 178, 178);
+    transform: rotate(-45deg);
+    cursor: pointer;
+  }
+  
+  .heart-not-like::before,
+  .heart-not-like::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(221, 178, 178);
+    border-radius: 50%; 
+  }
+  
+  .heart-not-like::before {
+    top: -25px; left: 0;
+  }
+  
+  .heart-not-like::after {
+    left: 25px; top: 0;
+  }
+  
+  .heart-not-like:hover {
+    position: relative;
+    left: 950px;
+    bottom: 480px;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(221, 178, 178);
+    transform: rotate(-45deg);
+    cursor: pointer;
+    scale: 1.05;
+  }
+  
+  .heart {
+    position: relative;
+    left: 950px;
+    bottom: 480px;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(227, 33, 33);
+    transform: rotate(-45deg);
+    cursor: pointer;
+  }
+  
+  .heart::before,
+  .heart::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: rgb(227, 33, 33);
+    border-radius: 50%; 
+  }
+  
+  .heart::before {
+    top: -25px; left: 0;
+  }
+  
+  .heart::after {
+    left: 25px; top: 0;
+  }
+  
+  .comment {
+    position: absolute;
+    left: 920px;
+    bottom: 300px;
+    height: 100px;
+  }
+  
+  .comment-style {
+    margin-top: 10px;
+  }
+  
+  .main-comments {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .comments-style {
+    padding-left: 20px;
+    padding-top: 15px;
+  }
+  
+  .comments {
+    height: 300px;
+    overflow-y: auto;
+    width: 250px;
+  }
+  
+  .delete-comment {
+    cursor: pointer;
+    position: relative;
+    opacity: 0.6;
+    margin-left: 15px;
+  }
+  
+  .add-favorites {
+    position: relative;
+    background-color: #c1c4dd;
+    border: none;
+    cursor: pointer;
+    font-size: 85%;
+    opacity: 0.8;
+}
+  
+.quota {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 130px;
+  left: 40%;
+  bottom: 40%;
+  background-color: #2196F3;
+  border-radius: 20px;
+  opacity: 0.95;
+  padding: 5px;
+  color: aqua;
+  text-align: center; 
+  align-items: center;
+}
+  
+  .ok {
+    position: relative;
+    top: 23px;
+    cursor: pointer;
+  }
+  
+  .comment-input {
+    background-color: #c1c4dd;
+    outline: none;
+    border-radius: 7px;
+    border: 0;
+    height: 20px;
+  }
+  
+  .comment-input:focus {
+    background-color: #c1c4dd;
+    outline: none;
+    border: 1px solid rgb(122, 97, 97);
+  }
+  
+  .save-comment {
+    background-color: #c1c4dd;
+    border: none;
+    cursor: pointer;
+    font-size: 90%;
+    opacity: 0.8;
+  }
+  

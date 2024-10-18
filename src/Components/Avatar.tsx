@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import './App.css';
+import '../Styles/Avatar.css';
 
 interface PropsAvatar {
     authorization: string,
@@ -8,8 +8,7 @@ interface PropsAvatar {
 
 const Avatar: FC<PropsAvatar> = (props) => {
     const [ava, setAva] = useState<string | null>(null);
-    
-    let avatar;
+ let avatar;
     let miniAvatar;
 
     if (ava == null) {
@@ -49,7 +48,7 @@ const Avatar: FC<PropsAvatar> = (props) => {
                         }
                     }} 
                 />
-            </label><br/>
+            </label>
             {miniAvatar}
         </div>
     );
